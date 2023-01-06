@@ -10,6 +10,7 @@ namespace Ex04.Menus.Delegates
     {
         protected string m_Title;
         protected int m_OptionNumber = 0;
+        protected int m_CurrentMenuLevel = 0;
 
         public string Title
         {
@@ -21,6 +22,12 @@ namespace Ex04.Menus.Delegates
         {
             get { return m_OptionNumber; }
             set { m_OptionNumber = value; }
+        }
+
+        protected int CurrentMenuLevel
+        {
+            get { return m_CurrentMenuLevel; }
+            set { m_CurrentMenuLevel = value; }
         }
 
         public MenuItem(string i_Title)
