@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Test
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
