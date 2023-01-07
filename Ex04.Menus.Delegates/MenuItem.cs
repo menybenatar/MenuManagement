@@ -8,9 +8,9 @@ namespace Ex04.Menus.Delegates
 {
     public class MenuItem
     {
-        protected string m_Title;
-        protected int m_OptionNumber = 0;
-        protected int m_CurrentMenuLevel = 0;
+        private string m_Title;
+        private int m_OptionIndex = 0;
+        private int m_CurrentMenuLevel = 0;
 
         public string Title
         {
@@ -18,13 +18,13 @@ namespace Ex04.Menus.Delegates
             set { m_Title = value; }
         }
 
-        public int OptionNumber
+        public int OptionIndex
         {
-            get { return m_OptionNumber; }
-            set { m_OptionNumber = value; }
+            get { return m_OptionIndex; }
+            set { m_OptionIndex = value; }
         }
 
-        protected int CurrentMenuLevel
+        public int CurrentMenuLevel
         {
             get { return m_CurrentMenuLevel; }
             set { m_CurrentMenuLevel = value; }

@@ -11,13 +11,7 @@ namespace Ex04.Menus.Test
     {
         public static void Main()
         {
-            runDelegateMenu();
-        }
-
-        private static void runDelegateMenu()
-        {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
+            DelegateTestMenu.RunDelegateMenu();
         }
     }
 }

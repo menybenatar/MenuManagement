@@ -24,29 +24,29 @@ namespace Ex04.Menus.Delegates
         public SubMenu(string i_Title, bool i_IsMainMenu = false)
             : base(i_Title)
         {
-            ActionItem backButton = i_IsMainMenu ? new ActionItem("Exit", eActionType.Exit) : new ActionItem("Back", eActionType.Back);
-
+            ActionItem backOrExistAction = i_IsMainMenu ? new ActionItem("Exit", eActionType.Exit) : new ActionItem("Back", eActionType.Back);
             m_MenuItems = new List<MenuItem>();
             m_IsMainMenu = i_IsMainMenu;
-            m_MenuItems.Add(backButton);
+            m_MenuItems.Add(backOrExistAction);
         }
 
-        public void AddMenuItemOption(MenuItem i_MenuItem)
+        public void AddMenuItem(MenuItem i_MenuItem)
         {
-            i_MenuItem.OptionNumber = m_MenuItems.Count;
+            i_MenuItem.OptionIndex = m_MenuItems.Count;
             m_MenuItems.Add(i_MenuItem);
         }
 
-        internal void DisplayMenu()
+        internal void DisplayMenu(int i_CurrentLevel)
         {
             StringBuilder menu = new StringBuilder();
-            menu.AppendLine(IsMainMenu ? $"Current Level: 0. Title: {m_Title}" : $"Current Level: {m_CurrentMenuLevel}. Title:{m_OptionNumber}. {m_Title}");
+            menu.AppendLine(IsMainMenu ? $"{Title}" : $"{OptionIndex}. {Title}");
+            menu.AppendLine($"Current Level: {i_CurrentLevel}");
             menu.AppendLine("===================");
             foreach (MenuItem menuItem in m_MenuItems)
             {
-                if (menuItem.OptionNumber != 0)
+                if (menuItem.OptionIndex != 0)
                 {
-                    menu.AppendFormat("{0}. {1}{2}", menuItem.OptionNumber, menuItem.Title, Environment.NewLine);
+                    menu.AppendFormat("{0}. {1}{2}", menuItem.OptionIndex, menuItem.Title, Environment.NewLine);
                 }
             }
 

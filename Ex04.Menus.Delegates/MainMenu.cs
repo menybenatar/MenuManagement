@@ -37,7 +37,7 @@ namespace Ex04.Menus.Delegates
 
             while (isMenuAlive)
             {
-                m_CurrentMenu.DisplayMenu();
+                m_CurrentMenu.DisplayMenu(m_PreviousMenus.Count);
                 int menuItemIndex = getInputAndValidate();
                 if (m_CurrentMenu.MenuItems[menuItemIndex] is ActionItem actionItem)
                 {
