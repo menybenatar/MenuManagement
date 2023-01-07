@@ -57,7 +57,7 @@ namespace Ex04.Menus.Delegates
         {
             const bool v_IsNotValid = true;
             int userInput;
-            string message = m_CurrentMenu.MenuItems.Count > 0 ? $"Plese Select A Number Between 0 and {m_CurrentMenu.MenuItems.Count - 1}"
+            string message = m_CurrentMenu.MenuItems.Count > 0 ? $"Please Select A Number Between 0 and {m_CurrentMenu.MenuItems.Count - 1}"
                 : "Please Select 0 To Go Back";
             Console.WriteLine(message);
             while (v_IsNotValid)

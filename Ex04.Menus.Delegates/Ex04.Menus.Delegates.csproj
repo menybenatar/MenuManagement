@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ActionItem.cs" />
-    <Compile Include="eTypeOfAction.cs" />
+    <Compile Include="eActionType.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
