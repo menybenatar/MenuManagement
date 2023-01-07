@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="DelegateTestMenu.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="VersionPresentation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
