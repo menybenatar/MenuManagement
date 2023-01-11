@@ -33,9 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DatePresentor.cs" />
     <Compile Include="DelegateTestMenu.cs" />
+    <Compile Include="InterfaceTestMenu.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="VersionPresentation.cs" />
+    <Compile Include="TimePresentor.cs" />
+    <Compile Include="UppercaseCounter.cs" />
+    <Compile Include="VersionPresentor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -46,6 +50,10 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.Unstable.1.2.0.435\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ex04.Menus. Interfaces\Ex04.Menus.Interfaces.csproj">
+      <Project>{f64b6dfe-86d0-46ed-802b-18c765e5edfe}</Project>
+      <Name>Ex04.Menus.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ex04.Menus.Delegates\Ex04.Menus.Delegates.csproj">
       <Project>{7ddaeebe-b945-4c9c-8625-34d497d0b114}</Project>
       <Name>Ex04.Menus.Delegates</Name>

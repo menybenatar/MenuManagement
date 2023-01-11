@@ -31,7 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ActionItem.cs" />
+    <Compile Include="eActionType.cs" />
+    <Compile Include="ISelecetedItemObserver.cs" />
+    <Compile Include="MainMenu.cs" />
+    <Compile Include="MenuItem.cs" />
+    <Compile Include="SubMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

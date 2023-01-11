@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Ex04.Menus.Delegates
+namespace Ex04.Menus.Interfaces
 {
     public class MainMenu
     {
@@ -83,7 +81,7 @@ namespace Ex04.Menus.Delegates
                 case eActionType.Event:
                     Console.Clear();
                     i_ActionItem.DoWhenSelected();
-                    Console.WriteLine("Please Enter Any Key To Continue...");
+                    Console.WriteLine("Please Enter Any Key To Return...");
                     Console.ReadKey();
                     break;
                 case eActionType.Back:
