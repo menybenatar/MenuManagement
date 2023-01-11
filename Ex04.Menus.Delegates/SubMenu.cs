@@ -34,21 +34,21 @@ namespace Ex04.Menus.Delegates
             r_MenuItems.Add(i_MenuItem);
         }
 
-        public void DisplayMenu(int i_CurrentLevel)
+        public void PrintMenu(int i_CurrentLevel)
         {
             StringBuilder menu = new StringBuilder();
-            menu.AppendLine(IsMainMenu ? $"{Title}" : $"{OptionIndex}. {Title}");
+            menu.AppendLine(IsMainMenu ? $"**{Title}**" : $"{OptionIndex}. {Title}");
             menu.AppendLine($"Current Level: {i_CurrentLevel}");
-            menu.AppendLine("===================");
+            menu.AppendLine("------------------------------ ");
             foreach (MenuItem menuItem in r_MenuItems)
             {
                 if (menuItem.OptionIndex != 0)
                 {
-                    menu.AppendFormat("{0}. {1}{2}", menuItem.OptionIndex, menuItem.Title, Environment.NewLine);
+                    menu.AppendFormat("{0} -> {1}{2}", menuItem.OptionIndex, menuItem.Title, Environment.NewLine);
                 }
             }
 
-            menu.Append($"0. {r_MenuItems[0].Title}");
+            menu.Append($"0 -> {r_MenuItems[0].Title}");
             Console.WriteLine(menu);
         }
     }

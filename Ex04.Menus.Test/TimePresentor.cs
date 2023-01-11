@@ -7,7 +7,7 @@ namespace Ex04.Menus.Test
     {
         public void OnSelected()
         {
-            string timeMessage = string.Format("The Current Time Is:{0}{1}{0}", Environment.NewLine, DateTime.Now.ToString("T"));
+            string timeMessage = $"The Current Time Is:{Environment.NewLine}{DateTime.Now.ToString("T")}{Environment.NewLine}";
             Console.WriteLine(timeMessage);
         }
     }

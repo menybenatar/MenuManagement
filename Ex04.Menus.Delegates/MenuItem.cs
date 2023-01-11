@@ -5,6 +5,11 @@
         private readonly string r_Title;
         private int m_OptionIndex = 0;
 
+        public MenuItem(string i_Title)
+        {
+            r_Title = i_Title;
+        }
+
         public string Title
         {
             get { return r_Title; }
@@ -14,11 +19,6 @@
         {
             get { return m_OptionIndex; }
             set { m_OptionIndex = value; }
-        }
-
-        public MenuItem(string i_Title)
-        {
-            r_Title = i_Title;
         }
     }
 }

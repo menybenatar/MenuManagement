@@ -5,49 +5,41 @@ namespace Ex04.Menus.Interfaces
 {
     public class MainMenu
     {
-        private SubMenu m_MainMenuItems;
+        private readonly Stack r_PreviousMenus;
+        private readonly SubMenu r_MainMenuItems;
         private SubMenu m_CurrentMenu;
-        private Stack m_PreviousMenus;
 
         public SubMenu MainMenuItems
         {
-            get { return m_MainMenuItems; }
-            set { m_MainMenuItems = value; }
+            get { return r_MainMenuItems; }
         }
 
-        public Stack PreviousMenus
-        {
-            get { return m_PreviousMenus; }
-            set { m_PreviousMenus = value; }
-        }
-
-        public MainMenu()
+        public MainMenu(string i_Title)
         {
             const bool v_IsMainMenu = true;
-            m_MainMenuItems = new SubMenu("Main Menu", v_IsMainMenu);
-            m_CurrentMenu = m_MainMenuItems;
-            m_PreviousMenus = new Stack();
+            r_MainMenuItems = new SubMenu(i_Title, v_IsMainMenu);
+            r_PreviousMenus = new Stack();
+            m_CurrentMenu = r_MainMenuItems;
         }
 
         public void Show()
         {
             bool isMenuAlive = true;
-
             while (isMenuAlive)
             {
-                m_CurrentMenu.DisplayMenu(m_PreviousMenus.Count);
+                m_CurrentMenu.PrintMenu(r_PreviousMenus.Count);
                 int menuItemIndex = getInputAndValidate();
+                Console.Clear();
                 if (m_CurrentMenu.MenuItems[menuItemIndex] is ActionItem actionItem)
                 {
-                    ExecuteAction(actionItem, ref isMenuAlive);
+                    isMenuAlive = executeAction(actionItem);
+                    Console.Clear();
                 }
                 else
                 {
-                    m_PreviousMenus.Push(m_CurrentMenu);
+                    r_PreviousMenus.Push(m_CurrentMenu);
                     m_CurrentMenu = m_CurrentMenu.MenuItems[menuItemIndex] as SubMenu;
                 }
-
-                Console.Clear();
             }
         }
 
@@ -74,55 +66,25 @@ namespace Ex04.Menus.Interfaces
             return userInput;
         }
 
-        private void ExecuteAction(ActionItem i_ActionItem, ref bool io_KeepShowingMenu)
+        private bool executeAction(ActionItem i_ActionItem)
         {
+            bool isMenuAlive = true;
             switch (i_ActionItem.ActionType)
             {
                 case eActionType.Event:
-                    Console.Clear();
                     i_ActionItem.DoWhenSelected();
                     Console.WriteLine("Please Enter Any Key To Return...");
                     Console.ReadKey();
                     break;
                 case eActionType.Back:
-                    m_CurrentMenu = m_PreviousMenus.Pop() as SubMenu;
+                    m_CurrentMenu = r_PreviousMenus.Pop() as SubMenu;
                     break;
                 case eActionType.Exit:
-                    io_KeepShowingMenu = false;
+                    isMenuAlive = false;
                     break;
             }
-        }
 
-        private int getUserInput()
-        {
-            bool isInputInvalid = true;
-            string userInput = string.Empty;
-            string askToSelect = m_CurrentMenu.MenuItems.Count == 0
-                                     ? "Press 0 To Go Back"
-                                     : $"Please enter your choice (1 - {m_CurrentMenu.MenuItems.Count - 1} or 0 to exit):{Environment.NewLine}>> ";
-
-            Console.Write(askToSelect);
-
-            do
-            {
-                userInput = Console.ReadLine();
-                isInputInvalid = validateUserInput(userInput);
-
-                if (isInputInvalid)
-                {
-                    Console.WriteLine($"Your Input Is Invalid! Please Select Options 0 - {m_CurrentMenu.MenuItems.Count - 1}");
-                }
-            }
-            while (isInputInvalid);
-
-            return int.Parse(userInput);
-        }
-
-        private bool validateUserInput(string i_UserInput)
-        {
-            bool isInputNumber = int.TryParse(i_UserInput, out int inputNumber);
-
-            return !(isInputNumber && inputNumber >= 0 && inputNumber <= (m_CurrentMenu.MenuItems.Count - 1));
+            return isMenuAlive;
         }
     }
 }

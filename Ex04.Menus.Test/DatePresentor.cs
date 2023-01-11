@@ -7,7 +7,7 @@ namespace Ex04.Menus.Test
     {
         public void OnSelected()
         {
-            string dateMessage = string.Format("The Current Date Is:{0}{1}{0}", Environment.NewLine, DateTime.Now.ToString("dd/MM/yyyy"));
+            string dateMessage = $"The Current Date Is:{Environment.NewLine}{DateTime.Now.ToString("dd/MM/yyyy")}{Environment.NewLine}";
             Console.WriteLine(dateMessage);
         }
     }

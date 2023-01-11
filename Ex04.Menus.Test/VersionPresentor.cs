@@ -3,7 +3,7 @@ using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
-    internal class VersionPresentor : ISelecetedItemObserver
+    public class VersionPresentor : ISelecetedItemObserver
     {
         public void OnSelected()
         {

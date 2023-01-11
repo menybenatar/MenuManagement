@@ -14,10 +14,10 @@ namespace Ex04.Menus.Delegates
             get { return r_MainMenuItems; }
         }
 
-        public MainMenu()
+        public MainMenu(string i_Title)
         {
             const bool v_IsMainMenu = true;
-            r_MainMenuItems = new SubMenu("Main Menu", v_IsMainMenu);
+            r_MainMenuItems = new SubMenu(i_Title, v_IsMainMenu);
             r_PreviousMenus = new Stack();
             m_CurrentMenu = r_MainMenuItems;
         }
@@ -27,19 +27,19 @@ namespace Ex04.Menus.Delegates
             bool isMenuAlive = true;
             while (isMenuAlive)
             {
-                m_CurrentMenu.DisplayMenu(r_PreviousMenus.Count);
+                m_CurrentMenu.PrintMenu(r_PreviousMenus.Count);
                 int menuItemIndex = getInputAndValidate();
+                Console.Clear();
                 if (m_CurrentMenu.MenuItems[menuItemIndex] is ActionItem actionItem)
                 {
-                    ExecuteAction(actionItem, ref isMenuAlive);
+                    isMenuAlive = executeAction(actionItem);
+                    Console.Clear();
                 }
                 else
                 {
                     r_PreviousMenus.Push(m_CurrentMenu);
                     m_CurrentMenu = m_CurrentMenu.MenuItems[menuItemIndex] as SubMenu;
                 }
-
-                Console.Clear();
             }
         }
 
@@ -66,12 +66,12 @@ namespace Ex04.Menus.Delegates
             return userInput;
         }
 
-        private void ExecuteAction(ActionItem i_ActionItem, ref bool io_KeepShowingMenu)
+        private bool executeAction(ActionItem i_ActionItem)
         {
+            bool isMenuAlive = true;
             switch (i_ActionItem.ActionType)
             {
                 case eActionType.Event:
-                    Console.Clear();
                     i_ActionItem.DoWhenSelected();
                     Console.WriteLine("Please Enter Any Key To Return...");
                     Console.ReadKey();
@@ -80,9 +80,11 @@ namespace Ex04.Menus.Delegates
                     m_CurrentMenu = r_PreviousMenus.Pop() as SubMenu;
                     break;
                 case eActionType.Exit:
-                    io_KeepShowingMenu = false;
+                    isMenuAlive = false;
                     break;
             }
+
+            return isMenuAlive;
         }
     }
 }

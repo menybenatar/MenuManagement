@@ -2,32 +2,31 @@
 {
     public class ActionItem : MenuItem
     {
-        private eActionType m_ActionType;
+        private readonly eActionType r_ActionType;
         private ISelecetedItemObserver m_SelecetedItemObserver;
 
         public eActionType ActionType
         {
-            get { return m_ActionType; }
+            get { return r_ActionType; }
         }
 
         public ISelecetedItemObserver SelecetedItemObserver
         {
-            get { return m_SelecetedItemObserver; }
             set { m_SelecetedItemObserver = value; }
         }
 
         public ActionItem(string i_Title, eActionType i_TypeOfAction)
             : base(i_Title)
         {
-            m_ActionType = i_TypeOfAction;
+            r_ActionType = i_TypeOfAction;
         }
 
         public void DoWhenSelected()
         {
-            OnSelect();
+            onSelect();
         }
 
-        private void OnSelect()
+        private void onSelect()
         {
             m_SelecetedItemObserver?.OnSelected();
         }

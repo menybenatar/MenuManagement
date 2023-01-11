@@ -4,8 +4,8 @@
     {
         public static void Main()
         {
-            runDelegateMenu();
             runInterfaceMenu();
+            runDelegateMenu();
         }
 
         private static void runDelegateMenu()
