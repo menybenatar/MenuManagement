@@ -21,10 +21,10 @@ namespace Ex04.Menus.Delegates
 
         public void DoWhenSelected()
         {
-            OnSelect();
+            onSelect();
         }
 
-        private void OnSelect()
+        private void onSelect()
         {
             Selected?.Invoke();
         }

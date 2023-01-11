@@ -2,14 +2,12 @@
 {
     public class MenuItem
     {
-        private string m_Title;
+        private readonly string r_Title;
         private int m_OptionIndex = 0;
-        private int m_CurrentMenuLevel = 0;
 
         public string Title
         {
-            get { return m_Title; }
-            set { m_Title = value; }
+            get { return r_Title; }
         }
 
         public int OptionIndex
@@ -18,15 +16,9 @@
             set { m_OptionIndex = value; }
         }
 
-        public int CurrentMenuLevel
-        {
-            get { return m_CurrentMenuLevel; }
-            set { m_CurrentMenuLevel = value; }
-        }
-
         public MenuItem(string i_Title)
         {
-            m_Title = i_Title;
+            r_Title = i_Title;
         }
     }
 }

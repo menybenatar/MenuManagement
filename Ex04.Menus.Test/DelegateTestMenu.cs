@@ -6,28 +6,33 @@ namespace Ex04.Menus.Test
 {
     public class DelegateTestMenu
     {
-        public static void RunDelegateMenu()
+        private MainMenu m_MainMenu;
+
+        public void RunDelegateMenu()
         {
-            MainMenu mainMenu = new MainMenu();
+            m_MainMenu = new MainMenu();
+            menuInit();
+            m_MainMenu.Show();
+        }
+
+        private void menuInit()
+        {
             SubMenu firstSub = new SubMenu("Version and Uppercase");
             ActionItem versionAction = new ActionItem("Show Version", eActionType.Event);
-            versionAction.Selected += versionAction_Selected;
-            firstSub.AddMenuItem(versionAction);
             ActionItem countUppercaseAction = new ActionItem("Count Uppercase", eActionType.Event);
-            countUppercaseAction.Selected += countUppercaseAction_Selected;
+            firstSub.AddMenuItem(versionAction);
             firstSub.AddMenuItem(countUppercaseAction);
-            mainMenu.MainMenuItems.AddMenuItem(firstSub);
-
+            versionAction.Selected += versionAction_Selected;
+            countUppercaseAction.Selected += countUppercaseAction_Selected;
             SubMenu secondSub = new SubMenu("Show Date/Time");
             ActionItem dateAction = new ActionItem("Show Date", eActionType.Event);
-            dateAction.Selected += dateAction_Selected;
-            secondSub.AddMenuItem(dateAction);
             ActionItem timeAction = new ActionItem("Show Time", eActionType.Event);
-            timeAction.Selected += timeAction_Selected;
+            secondSub.AddMenuItem(dateAction);
             secondSub.AddMenuItem(timeAction);
-            mainMenu.MainMenuItems.AddMenuItem(secondSub);
-
-            mainMenu.Show();
+            dateAction.Selected += dateAction_Selected;
+            timeAction.Selected += timeAction_Selected;
+            m_MainMenu.MainMenuItems.AddMenuItem(firstSub);
+            m_MainMenu.MainMenuItems.AddMenuItem(secondSub);
         }
 
         private static void countUppercaseAction_Selected()

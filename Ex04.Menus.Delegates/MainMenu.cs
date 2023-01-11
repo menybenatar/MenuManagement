@@ -1,43 +1,33 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Ex04.Menus.Delegates
 {
     public class MainMenu
     {
-        private SubMenu m_MainMenuItems;
+        private readonly SubMenu r_MainMenuItems;
+        private readonly Stack r_PreviousMenus;
         private SubMenu m_CurrentMenu;
-        private Stack m_PreviousMenus;
 
         public SubMenu MainMenuItems
         {
-            get { return m_MainMenuItems; }
-            set { m_MainMenuItems = value; }
-        }
-
-        public Stack PreviousMenus
-        {
-            get { return m_PreviousMenus; }
-            set { m_PreviousMenus = value; }
+            get { return r_MainMenuItems; }
         }
 
         public MainMenu()
         {
             const bool v_IsMainMenu = true;
-            m_MainMenuItems = new SubMenu("Main Menu", v_IsMainMenu);
-            m_CurrentMenu = m_MainMenuItems;
-            m_PreviousMenus = new Stack();
+            r_MainMenuItems = new SubMenu("Main Menu", v_IsMainMenu);
+            r_PreviousMenus = new Stack();
+            m_CurrentMenu = r_MainMenuItems;
         }
 
         public void Show()
         {
             bool isMenuAlive = true;
-
             while (isMenuAlive)
             {
-                m_CurrentMenu.DisplayMenu(m_PreviousMenus.Count);
+                m_CurrentMenu.DisplayMenu(r_PreviousMenus.Count);
                 int menuItemIndex = getInputAndValidate();
                 if (m_CurrentMenu.MenuItems[menuItemIndex] is ActionItem actionItem)
                 {
@@ -45,7 +35,7 @@ namespace Ex04.Menus.Delegates
                 }
                 else
                 {
-                    m_PreviousMenus.Push(m_CurrentMenu);
+                    r_PreviousMenus.Push(m_CurrentMenu);
                     m_CurrentMenu = m_CurrentMenu.MenuItems[menuItemIndex] as SubMenu;
                 }
 
@@ -83,48 +73,16 @@ namespace Ex04.Menus.Delegates
                 case eActionType.Event:
                     Console.Clear();
                     i_ActionItem.DoWhenSelected();
-                    Console.WriteLine("Please Enter Any Key To Continue...");
+                    Console.WriteLine("Please Enter Any Key To Return...");
                     Console.ReadKey();
                     break;
                 case eActionType.Back:
-                    m_CurrentMenu = m_PreviousMenus.Pop() as SubMenu;
+                    m_CurrentMenu = r_PreviousMenus.Pop() as SubMenu;
                     break;
                 case eActionType.Exit:
                     io_KeepShowingMenu = false;
                     break;
             }
-        }
-
-        private int getUserInput()
-        {
-            bool isInputInvalid = true;
-            string userInput = string.Empty;
-            string askToSelect = m_CurrentMenu.MenuItems.Count == 0
-                                     ? "Press 0 To Go Back"
-                                     : $"Please enter your choice (1 - {m_CurrentMenu.MenuItems.Count - 1} or 0 to exit):{Environment.NewLine}>> ";
-
-            Console.Write(askToSelect);
-
-            do
-            {
-                userInput = Console.ReadLine();
-                isInputInvalid = validateUserInput(userInput);
-
-                if (isInputInvalid)
-                {
-                    Console.WriteLine($"Your Input Is Invalid! Please Select Options 0 - {m_CurrentMenu.MenuItems.Count - 1}");
-                }
-            }
-            while (isInputInvalid);
-
-            return int.Parse(userInput);
-        }
-
-        private bool validateUserInput(string i_UserInput)
-        {
-            bool isInputNumber = int.TryParse(i_UserInput, out int inputNumber);
-
-            return !(isInputNumber && inputNumber >= 0 && inputNumber <= (m_CurrentMenu.MenuItems.Count - 1));
         }
     }
 }

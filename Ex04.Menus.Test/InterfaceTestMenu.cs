@@ -4,7 +4,7 @@ namespace Ex04.Menus.Test
 {
     public class InterfaceTestMenu
     {
-        public static void RunInterfaceMenu()
+        public void RunInterfaceMenu()
         {
             MainMenu mainMenu = new MainMenu();
             SubMenu firstSub = new SubMenu("Version and Uppercase");
