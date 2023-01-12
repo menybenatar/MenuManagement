@@ -47,8 +47,8 @@ namespace Ex04.Menus.Interfaces
         {
             const bool v_IsNotValid = true;
             int userInput;
-            string message = m_CurrentMenu.MenuItems.Count > 0 ? $"Please Select A Number Between 0 and {m_CurrentMenu.MenuItems.Count - 1}"
-                : "Please Select 0 To Go Back";
+            string backOrExit = r_PreviousMenus.Count > 0 ? "Go Back" : "Exit";
+            string message = $"Please Enter Your Choice 1-{m_CurrentMenu.MenuItems.Count - 1}, or 0 To {backOrExit}";
             Console.WriteLine(message);
             while (v_IsNotValid)
             {
